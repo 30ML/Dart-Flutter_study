@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+
+class CircleListItem extends StatelessWidget {
+  const CircleListItem({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 54,
+      height: 54,
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        shape: BoxShape.circle,
+      ),
+      child: ClipOval(
+        child: Image.network(
+          'https://flutter.dev/docs/cookbook/img-files/effects/split-check/Avatar1.jpg',
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
