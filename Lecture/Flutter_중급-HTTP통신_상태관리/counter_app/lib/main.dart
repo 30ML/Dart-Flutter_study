@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,8 @@ class Counter extends StatefulWidget {
 }
 
 class _CounterState extends State<Counter> {
-  int _count = 0;
+  final counterSubject = BehaviorSubject<int>();
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +42,24 @@ class _CounterState extends State<Counter> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
-              child: Text('Add'),
+              child: const Text('Add'),
               color: Colors.grey[400],
               onPressed: () {
-                setState(() {
-                  _count += 1;
-                });
+                counterSubject.add(++_counter);
               },
             ),
             const SizedBox(height: 8),
-            Text(
-              '$_count',
-              style: TextStyle(fontSize: 30),
+            StreamBuilder<int>(
+              stream: counterSubject.stream,
+              initialData: 0,
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? Text(
+                        '${snapshot.data}',
+                        style: const TextStyle(fontSize: 30),
+                      )
+                    : Container();
+              },
             ),
           ],
         ),
