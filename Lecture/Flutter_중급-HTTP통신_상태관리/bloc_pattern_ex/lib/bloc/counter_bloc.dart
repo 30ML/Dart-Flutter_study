@@ -12,5 +12,6 @@ class CounterBloc {
     _countSubject.add(_count);
   }
 
+  // return stream
   Stream<int> get count$ => _countSubject.stream;
 }
