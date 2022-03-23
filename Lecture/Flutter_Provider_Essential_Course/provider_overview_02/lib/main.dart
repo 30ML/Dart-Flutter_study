@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_overview_02/model/dog.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,12 +11,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Provider Overview 02',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider<Dog>(
+      // MaterialApp widget 아래 모든 widget 들이
+      // 아래 Dog instance에 access 할 수 있음.
+      create: (context) => Dog(
+        name: 'Sun',
+        breed: 'BullDog',
+        age: 3,
       ),
-      home: const MyHomePage(),
+      child: MaterialApp(
+        title: 'Provider Overview 02',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(),
+      ),
     );
   }
 }
@@ -34,7 +45,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '- name: Dog Name',
+              '- name: ${Provider.of<Dog>(context).name}',
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 10),
@@ -54,11 +65,11 @@ class BreedAndAge extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '- breed: Dog Breed',
+          '- breed: ${Provider.of<Dog>(context).breed}',
           style: const TextStyle(fontSize: 20),
         ),
         const SizedBox(height: 10),
-        Age(),
+        const Age(),
       ],
     );
   }
@@ -72,8 +83,18 @@ class Age extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '- age: Dog Age',
-          style: TextStyle(fontSize: 20),
+          '- age: ${Provider.of<Dog>(context).age}',
+          style: const TextStyle(fontSize: 20),
+        ),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            Provider.of<Dog>(context, listen: false).grow();
+          },
+          child: const Text(
+            'Grow',
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ],
     );
