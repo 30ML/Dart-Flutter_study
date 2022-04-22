@@ -32,8 +32,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<CounterCubit, CounterState>(
-        builder: (context, state) {
+      body: BlocConsumer<CounterCubit, CounterState>(
+        listener: (context, state) {
           if (state.counter == 3) {
             showDialog(
               context: context,
@@ -51,7 +51,8 @@ class MyHomePage extends StatelessWidget {
               ),
             );
           }
-
+        },
+        builder: (context, state) {
           return Center(
             child: Text(
               // '${BlocProvider.of<CounterCubit>(context, listen: true).state.counter}',
@@ -65,13 +66,22 @@ class MyHomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => BlocProvider.of<CounterCubit>(context).increment(),
+            // onPressed: () =>
+            onPressed: () {
+              BlocProvider.of<CounterCubit>(context).increment();
+              // (O) context.read<CounterCubit>().increment();
+            },
             child: const Icon(Icons.add),
             heroTag: 'Increment',
           ),
           const SizedBox(width: 10),
           FloatingActionButton(
-            onPressed: () => BlocProvider.of<CounterCubit>(context).decrement(),
+            onPressed: () {
+              BlocProvider.of<CounterCubit>(context).decrement();
+              // (O) context.read<CounterCubit>().decrement();
+              // (X) BlocProvider.of<CounterCubit>(context, listen: true).decrement();
+              // (X) context.watch<CounterCubit>().decrement();
+            },
             child: const Icon(Icons.remove),
             heroTag: 'Decrement',
           ),
