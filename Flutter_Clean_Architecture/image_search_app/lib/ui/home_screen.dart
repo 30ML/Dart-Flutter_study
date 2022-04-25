@@ -19,7 +19,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _controller = TextEditingController();
-  List<Photo> _photos = [];
+  // PROBLEM(P3): data를 담는 곳이 UI를 담당하는 widget 안에 있음.
+  // List<Photo> _photos = [];
 
   // PROBLEM(P1): HomeScreen 위젯과 fetchPhoto 기능이 섞여 둘 중 하나만 수정이 필요해도 이 파일은 수정되어야 함.
   // Future<List<Photo>> fetchPhoto(String query) async { // CODE(P1)
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final pixabayApi = PhotoProvider.of(context);
+    final photoProvider = PhotoProvider.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -73,29 +74,33 @@ class _HomeScreenState extends State<HomeScreen> {
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () async {
-                    final List<Photo> photos =
-                        await pixabayApi.api.fetchPhoto(_controller.text);
-                    setState(() {
-                      _photos = photos;
-                    });
+                    photoProvider.fetch(_controller.text);
                   },
                 ),
               ),
             ),
           ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: _photos.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemBuilder: (context, index) {
-                return PhotoWidget(photo: _photos[index]);
-              },
-            ),
+          StreamBuilder<List<Photo>>(
+            stream: photoProvider.photoStream,
+            builder: (context, snapshot) {
+              return !snapshot.hasData
+                  ? const CircularProgressIndicator()
+                  : Expanded(
+                      child: GridView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: snapshot.data!.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                        ),
+                        itemBuilder: (context, index) {
+                          return PhotoWidget(photo: snapshot.data![index]);
+                        },
+                      ),
+                    );
+            },
           ),
         ],
       ),
