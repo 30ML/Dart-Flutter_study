@@ -1,13 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
 import 'package:image_search_app/data/api.dart';
 import 'package:image_search_app/model/photo.dart';
 import 'package:image_search_app/ui/widget/photo_widget.dart';
 // import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final PixabayApi pixabayApi;
+
+  const HomeScreen({
+    Key? key,
+    required this.pixabayApi,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -18,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Photo> _photos = [];
 
   // PROBLEM(P1): HomeScreen 위젯과 fetchPhoto 기능이 섞여 둘 중 하나만 수정이 필요해도 이 파일은 수정되어야 함.
-  // Future<List<Photo>> fetchPhoto(String query) async {
+  // Future<List<Photo>> fetchPhoto(String query) async { // CODE(P1)
   //   final response = await http.get(
   //     Uri.parse(
   //         'https://pixabay.com/api/?key=24829672-e86462931ca2f2cf80fb27137&q=$query&image_type=photo'),
@@ -31,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // PROBLEM(P1 -> P2): 아래 code로 인해 HomeScreen 화면 은 PixabayApi가 있어야만 돌아가는 code가 됨.
   // 즉, 아래 code 없이는 사용할 수 없음.
-  // 따라서 PixabayApi를 외부에서 생성해서 받아서 사용하는 것 좀더 좋은 형태
-  final pixabayApi = PixabayApi();
+  // final pixabayApi = PixabayApi(); // CODE(P2)
 
   @override
   void dispose() {
@@ -69,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: const Icon(Icons.search),
                   onPressed: () async {
                     final List<Photo> photos =
-                        await pixabayApi.fetchPhoto(_controller.text);
+                        await widget.pixabayApi.fetchPhoto(_controller.text);
                     setState(() {
                       _photos = photos;
                     });
