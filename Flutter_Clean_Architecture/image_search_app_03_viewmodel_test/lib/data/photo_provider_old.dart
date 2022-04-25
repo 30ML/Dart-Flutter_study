@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:image_search_app_03_viewmodel_test/data/api.dart';
+import 'package:image_search_app_03_viewmodel_test/data/pixabay_api.dart';
 import 'package:image_search_app_03_viewmodel_test/model/photo.dart';
 
 class PhotoProvider extends InheritedWidget {
@@ -28,7 +28,7 @@ class PhotoProvider extends InheritedWidget {
 
   // VM
   void fetch(String query) async {
-    final result = await api.fetchPhoto(query);
+    final result = await api.fetch(query);
     _photoStreamController.add(result);
   }
 

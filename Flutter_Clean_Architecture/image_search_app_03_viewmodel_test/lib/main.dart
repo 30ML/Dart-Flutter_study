@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_search_app_03_viewmodel_test/data/api.dart';
+import 'package:image_search_app_03_viewmodel_test/data/pixabay_api.dart';
 import 'package:image_search_app_03_viewmodel_test/data/photo_provider.dart';
 import 'package:image_search_app_03_viewmodel_test/ui/home_screen.dart';
 import 'package:image_search_app_03_viewmodel_test/ui/home_view_model.dart';

@@ -108,4 +108,18 @@ class Photo {
 
   factory Photo.fromJson(String source) =>
       Photo.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Photo{id: $id}';
+  }
+
+  @override
+  // int get hashCode => super.hashCode;
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Photo && runtimeType == other.runtimeType && id == other.id;
 }
