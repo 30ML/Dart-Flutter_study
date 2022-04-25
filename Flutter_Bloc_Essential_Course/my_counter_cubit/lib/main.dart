@@ -78,7 +78,7 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             onPressed: () {
               BlocProvider.of<CounterCubit>(context).decrement();
-              // (O) context.read<CounterCubit>().decrement();
+              // (O) context.read<CounterCubit>().decrement(`);
               // (X) BlocProvider.of<CounterCubit>(context, listen: true).decrement();
               // (X) context.watch<CounterCubit>().decrement();
             },
