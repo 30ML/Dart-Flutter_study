@@ -10,9 +10,6 @@ class PixabayApi implements PhotoApiRepository {
 
   @override
   Future<List<Photo>> fetch(String query, {http.Client? client}) async {
-    // if (client == null) {
-    //   client = http.Client();
-    // }
     client ??= http.Client();
 
     // final response = await http.get(
