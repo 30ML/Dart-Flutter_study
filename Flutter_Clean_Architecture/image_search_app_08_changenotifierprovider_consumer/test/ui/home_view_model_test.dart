@@ -9,20 +9,18 @@ void main() {
     // Test는 의존되는 객체 때문에 결과가 달라지면 안됨.
 
     viewModel.fetch('apple');
-    viewModel.fetch('apple');
 
     final List<Photo> result = fakeJson.map((e) => Photo.fromJson(e)).toList();
 
     expect(
-      viewModel.photoStream,
-      emitsInOrder([
-        equals([]),
-        equals(result),
-        equals(result),
-        // equals(result), // FAIL
-        // isA<List<Photo>>(),
-        // isA<List<Photo>>(),
-      ]),
+      // viewModel.photoStream,
+      // emitsInOrder([
+      //   equals([]),
+      //   equals(result),
+      //   equals(result),
+      // ]),
+      viewModel.photos,
+      result,
     );
   });
 }
@@ -38,61 +36,61 @@ class FakePhotoApiRepository extends PhotoApiRepository {
 
 List<Map<String, dynamic>> fakeJson = [
   {
-    "id": 5043708,
+    "id": 410311,
     "pageURL":
-        "https://pixabay.com/photos/honey-beekeeper-beekeeping-glass-5043708/",
+        "https://pixabay.com/photos/iphone-hand-screen-smartphone-apps-410311/",
     "type": "photo",
-    "tags": "honey, beekeeper, beekeeping",
+    "tags": "iphone, hand, screen",
     "previewURL":
-        "https://cdn.pixabay.com/photo/2020/04/14/18/13/honey-5043708_150.jpg",
+        "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_150.jpg",
     "previewWidth": 150,
-    "previewHeight": 100,
+    "previewHeight": 99,
     "webformatURL":
-        "https://pixabay.com/get/gc6343fa77881bd61e1dc7b503c9cb25e47d8745a04f9ab4bf034bc396d23fd1f9372b3e1e7c0293d0585210b9c6e9e290deb05dc9b68e2dbfeb24a083ab92bfb_640.jpg",
+        "https://pixabay.com/get/g2c8a231cb7e82b42e1a5d2860553fa8d645f6785a31233c5da9db0ab03a7c542b99466a76463815ed611b4d2ee4b6fe6_640.jpg",
     "webformatWidth": 640,
-    "webformatHeight": 427,
+    "webformatHeight": 426,
     "largeImageURL":
-        "https://pixabay.com/get/g5db16eb98f14b6bc085e98f0fb6eee67611f78d4a0444fe8791fa4f9f8f1ec730cd2c25f2a9756064ce7f4b852e0859cc436b3a8dc1373bf83b1cba0452b7607_1280.jpg",
-    "imageWidth": 5184,
-    "imageHeight": 3456,
-    "imageSize": 702028,
-    "views": 28618,
-    "downloads": 19513,
-    "collections": 607,
-    "likes": 97,
-    "comments": 20,
-    "user_id": 37761,
-    "user": "Lolame",
+        "https://pixabay.com/get/g679ce0c9c91f28d8cf56dc1a03997792ec7a529ca04d3b57706308d96ac41305f6cb4cc73a3ab7ebaa6a004331a41393c9d92fcf3b24569dc6ec28ab7fc6850a_1280.jpg",
+    "imageWidth": 1920,
+    "imageHeight": 1280,
+    "imageSize": 416413,
+    "views": 486622,
+    "downloads": 238688,
+    "collections": 5545,
+    "likes": 579,
+    "comments": 159,
+    "user_id": 264599,
+    "user": "JESHOOTS-com",
     "userImageURL":
-        "https://cdn.pixabay.com/user/2019/05/19/22-51-58-56_250x250.jpg"
+        "https://cdn.pixabay.com/user/2014/06/08/15-27-10-248_250x250.jpg"
   },
   {
-    "id": 3950334,
+    "id": 410324,
     "pageURL":
-        "https://pixabay.com/photos/black-flower-woman-colour-window-3950334/",
+        "https://pixabay.com/photos/iphone-smartphone-apps-apple-inc-410324/",
     "type": "photo",
-    "tags": "black, flower, woman",
+    "tags": "iphone, smartphone, apps",
     "previewURL":
-        "https://cdn.pixabay.com/photo/2019/01/23/14/06/black-3950334_150.jpg",
-    "previewWidth": 104,
-    "previewHeight": 150,
+        "https://cdn.pixabay.com/photo/2014/08/05/10/30/iphone-410324_150.jpg",
+    "previewWidth": 150,
+    "previewHeight": 99,
     "webformatURL":
-        "https://pixabay.com/get/g49c590dcac6f4807dd2edbc1da86329abc823f58aa5b801bb6eb0195238da23f35f239b3b8fff7657745b8334105d520c8024d142cdf91992670417d3418b5e0_640.jpg",
-    "webformatWidth": 445,
-    "webformatHeight": 640,
+        "https://pixabay.com/get/g98d14fdd101873422d42a25b0d5a20ec8bc2e551031e82eef7e0db0fc728d6fe8a3010e5c9118bb670ad45ed75360be4_640.jpg",
+    "webformatWidth": 640,
+    "webformatHeight": 426,
     "largeImageURL":
-        "https://pixabay.com/get/g78d5bf23beafe190f2c69b14b982748133896f7fb8509e4853726c2337695e0d346c8c87cae807ad938fbac80d6250c008d01f832942f5ea00345785ca57a28a_1280.jpg",
-    "imageWidth": 3707,
-    "imageHeight": 5324,
-    "imageSize": 3880219,
-    "views": 10707,
-    "downloads": 6712,
-    "collections": 200,
-    "likes": 57,
-    "comments": 12,
-    "user_id": 6333711,
-    "user": "fkabay",
+        "https://pixabay.com/get/ge2a76979eac15e738da2e5837207c5d420c0ed8a749db9e7103df98a765b8b8e9d1a2a637605f6268a856a44c515897a6c6cbc3542328ffb1fd0e5636dcd03fd_1280.jpg",
+    "imageWidth": 2180,
+    "imageHeight": 1453,
+    "imageSize": 477025,
+    "views": 638749,
+    "downloads": 358874,
+    "collections": 6604,
+    "likes": 754,
+    "comments": 194,
+    "user_id": 264599,
+    "user": "JESHOOTS-com",
     "userImageURL":
-        "https://cdn.pixabay.com/user/2018/12/12/09-40-27-899_250x250.jpg"
+        "https://cdn.pixabay.com/user/2014/06/08/15-27-10-248_250x250.jpg"
   },
 ];
