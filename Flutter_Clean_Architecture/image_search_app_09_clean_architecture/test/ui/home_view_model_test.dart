@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:image_search_app_09_clean_architecture/data/photo_api_repository.dart';
-import 'package:image_search_app_09_clean_architecture/model/photo.dart';
-import 'package:image_search_app_09_clean_architecture/ui/home_view_model.dart';
+import 'package:image_search_app_09_clean_architecture/domain/repository/photo_api_repository.dart';
+import 'package:image_search_app_09_clean_architecture/domain/model/photo.dart';
+import 'package:image_search_app_09_clean_architecture/presentation/home/home_view_model.dart';
 
 void main() {
-  test('Stream이 잘 작동해야 함.', () async {
+  test('Stream works well', () async {
     final viewModel = HomeViewModel(FakePhotoApiRepository());
     // Test는 의존되는 객체 때문에 결과가 달라지면 안됨.
 
@@ -12,16 +12,7 @@ void main() {
 
     final List<Photo> result = fakeJson.map((e) => Photo.fromJson(e)).toList();
 
-    expect(
-      // viewModel.photoStream,
-      // emitsInOrder([
-      //   equals([]),
-      //   equals(result),
-      //   equals(result),
-      // ]),
-      viewModel.photos,
-      result,
-    );
+    expect(viewModel.photos, result);
   });
 }
 
@@ -46,51 +37,51 @@ List<Map<String, dynamic>> fakeJson = [
     "previewWidth": 150,
     "previewHeight": 99,
     "webformatURL":
-        "https://pixabay.com/get/g2c8a231cb7e82b42e1a5d2860553fa8d645f6785a31233c5da9db0ab03a7c542b99466a76463815ed611b4d2ee4b6fe6_640.jpg",
+        "https://pixabay.com/get/ga40944969ab1ca0cb5e5e2a753382c5ef38aa9b1bdf195f44a6e8c7def03f5b2ce08c74211f5bd254565642907f5e7b5_640.jpg",
     "webformatWidth": 640,
     "webformatHeight": 426,
     "largeImageURL":
-        "https://pixabay.com/get/g679ce0c9c91f28d8cf56dc1a03997792ec7a529ca04d3b57706308d96ac41305f6cb4cc73a3ab7ebaa6a004331a41393c9d92fcf3b24569dc6ec28ab7fc6850a_1280.jpg",
+        "https://pixabay.com/get/gac97151d90f6f74f39ba9a6013d97a3e0c8b3b2673356bef20a65b9a253d439913d8d3566a6e8485773b9aea90170c38a538a3582b0a2af3e51efe53ebc8885b_1280.jpg",
     "imageWidth": 1920,
     "imageHeight": 1280,
     "imageSize": 416413,
-    "views": 486622,
-    "downloads": 238688,
-    "collections": 5545,
-    "likes": 579,
-    "comments": 159,
+    "views": 441374,
+    "downloads": 213676,
+    "collections": 2913,
+    "likes": 573,
+    "comments": 146,
     "user_id": 264599,
     "user": "JESHOOTS-com",
     "userImageURL":
         "https://cdn.pixabay.com/user/2014/06/08/15-27-10-248_250x250.jpg"
   },
   {
-    "id": 410324,
+    "id": 620817,
     "pageURL":
-        "https://pixabay.com/photos/iphone-smartphone-apps-apple-inc-410324/",
+        "https://pixabay.com/photos/office-notes-notepad-entrepreneur-620817/",
     "type": "photo",
-    "tags": "iphone, smartphone, apps",
+    "tags": "office, notes, notepad",
     "previewURL":
-        "https://cdn.pixabay.com/photo/2014/08/05/10/30/iphone-410324_150.jpg",
+        "https://cdn.pixabay.com/photo/2015/02/02/11/08/office-620817_150.jpg",
     "previewWidth": 150,
     "previewHeight": 99,
     "webformatURL":
-        "https://pixabay.com/get/g98d14fdd101873422d42a25b0d5a20ec8bc2e551031e82eef7e0db0fc728d6fe8a3010e5c9118bb670ad45ed75360be4_640.jpg",
+        "https://pixabay.com/get/g5dce019c1f10360baae95dd11b0a474f4a88609aa453b6fb63eb21af5ced9f66512d0eecdb37d13d65aece68c04ac30f_640.jpg",
     "webformatWidth": 640,
-    "webformatHeight": 426,
+    "webformatHeight": 425,
     "largeImageURL":
-        "https://pixabay.com/get/ge2a76979eac15e738da2e5837207c5d420c0ed8a749db9e7103df98a765b8b8e9d1a2a637605f6268a856a44c515897a6c6cbc3542328ffb1fd0e5636dcd03fd_1280.jpg",
-    "imageWidth": 2180,
-    "imageHeight": 1453,
-    "imageSize": 477025,
-    "views": 638749,
-    "downloads": 358874,
-    "collections": 6604,
-    "likes": 754,
-    "comments": 194,
-    "user_id": 264599,
-    "user": "JESHOOTS-com",
+        "https://pixabay.com/get/g288340ffe42c24238450b87b53b341663b8a4d5a34cd29ddfe5bfb2ea8ebad94f954e901100c4cd89e7e821fb78c1262034505ae2109e88ecf14df55589fddb1_1280.jpg",
+    "imageWidth": 4288,
+    "imageHeight": 2848,
+    "imageSize": 2800224,
+    "views": 631369,
+    "downloads": 269069,
+    "collections": 3062,
+    "likes": 1062,
+    "comments": 242,
+    "user_id": 663163,
+    "user": "Firmbee",
     "userImageURL":
-        "https://cdn.pixabay.com/user/2014/06/08/15-27-10-248_250x250.jpg"
+        "https://cdn.pixabay.com/user/2020/11/25/09-38-28-431_250x250.png"
   },
 ];
