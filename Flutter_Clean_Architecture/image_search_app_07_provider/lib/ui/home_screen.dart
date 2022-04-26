@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:image_search_app_07_provider/data/photo_provider.dart';
+// import 'package:image_search_app_07_provider/data/photo_provider.dart';
 import 'package:image_search_app_07_provider/model/photo.dart';
+import 'package:image_search_app_07_provider/ui/home_view_model.dart';
 import 'package:image_search_app_07_provider/ui/widget/photo_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -24,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = PhotoProvider.of(context).viewModel;
+    // final viewModel = PhotoProvider.of(context).viewModel;
+    // final viewModel = Provider.of<HomeViewModel>(context); // OLD
+    final viewModel = context.watch<HomeViewModel>(); // NEW
 
     return Scaffold(
       appBar: AppBar(
