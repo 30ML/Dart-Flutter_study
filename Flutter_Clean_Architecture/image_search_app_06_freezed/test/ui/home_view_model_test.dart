@@ -11,7 +11,7 @@ void main() {
     viewModel.fetch('apple');
     viewModel.fetch('apple');
 
-    final result = fakeJson.map((e) => Photo.fromMap(e)).toList();
+    final List<Photo> result = fakeJson.map((e) => Photo.fromJson(e)).toList();
 
     expect(
       viewModel.photoStream,
@@ -32,7 +32,7 @@ class FakePhotoApiRepository extends PhotoApiRepository {
   Future<List<Photo>> fetch(String query) async {
     Future.delayed(const Duration(milliseconds: 500));
 
-    return fakeJson.map((e) => Photo.fromMap(e)).toList();
+    return fakeJson.map((e) => Photo.fromJson(e)).toList();
   }
 }
 
